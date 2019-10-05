@@ -9,6 +9,10 @@ nmap whs :sp<cr>
 nmap wvs :vsp<cr>
 " 切换窗口快捷键
 nnoremap wn <C-W><C-W>
+nnoremap wnh <C-W>h
+nnoremap wnj <C-W>j
+nnoremap wnk <C-W>k
+nnoremap wnl <C-W>l
 " 关闭当前窗口快捷键wcc
 nmap wcc :close<cr>
 " 关闭其他当前窗口快捷键
@@ -18,8 +22,7 @@ nmap wh+ :10wincmd><cr>
 nmap wh- :10wincmd<<cr>
 nmap wv+ :10wincmd+<cr>
 nmap wv- :10wincmd-<cr>
-" 告诉vim terminal支持 256 colors
-set t_Co=256
+nnoremap ww= <C-W>=
 " 高亮显示当前行/列
 set cursorline
 hi CursorLine cterm=NONE ctermbg=brown ctermfg=white guibg=darkred guifg=white
@@ -79,18 +82,6 @@ let g:airline_theme='luna'
 " <<<<<< airline <<<<<<
 
 " ------ 语法检查 ------
-" >>>>>> syntastic >>>>>>
-" Plug 'vim-syntastic/syntastic'
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 0
-" <<<<<< syntastic <<<<<<
-
-" ------ 语法检查 ------
 " >>>>>> ale >>>>>>
 Plug 'dense-analysis/ale'
 " 始终开启标志列
@@ -115,10 +106,10 @@ Plug 'ctrlpvim/ctrlp.vim'
 
 " ------ 文件/buffer模糊查找 ------
 " >>>>>> ctrlspace >>>>>>
-Plug 'vim-ctrlspace/vim-ctrlspace'
-set nocompatible
-set hidden
-let g:CtrlSpaceDefaultMappingKey = "<C-m> "
+" Plug 'vim-ctrlspace/vim-ctrlspace'
+" set nocompatible
+" set hidden
+" let g:CtrlSpaceDefaultMappingKey = "<C-m> "
 " <<<<<< ctrlspace <<<<<<
 
 " ------ 文件模板 ------
@@ -142,14 +133,42 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'fatih/vim-go'
 Plug 'elzr/vim-json'
 
-" 前后空格显示告警色
-Plug 'bronson/vim-trailing-whitespace'
+" 成员函数、成员变量列表
+" >>>>>> tagbar >>>>>>
+Plug 'majutsushi/tagbar'
+nmap <F8> :TagbarToggle<CR>
+" <<<<<< tagbar <<<<<<
+
+" 高亮关键字
+Plug 'vim-scripts/Mark--Karkat'
 
 " vim列对齐线
+" >>>>>> indentLine >>>>>>
 Plug 'Yggdroot/indentLine'
+" 设置对齐线开/关快捷键
+nmap <leader>il :IndentLinesToggle<CR>
+" 设置对齐线默认开1/关0状态
+let g:indentLine_enabled = 1
+let g:indentLine_concealcursor = 'inc'
+let g:indentLine_conceallevel = 1
+" 设置对齐线样式
+let g:indentLine_char_list = ['┊', '┆', '¦']
+" 设置GUI对齐线颜色
+" let g:indentLine_color_gui = '#A4E57E'
+" let g:indentLine_bgcolor_gui = '#FF5F00'
+" 设置终端对齐线颜色
+" let g:indentLine_color_term = 239
+" let g:indentLine_bgcolor_term = 202
+" <<<<<< indentLine <<<<<<
 
 " 前后空格显示告警色
-Plug 'bronson/vim-trailing-whitespace'
+" >>>>>> better-whitespace >>>>>>
+Plug 'ntpeters/vim-better-whitespace'
+let g:better_whitespace_enabled=1
+let g:strip_whitespace_on_save=1
+let g:strip_whitelines_at_eof=1
+let g:show_spaces_that_precede_tabs=1
+" <<<<<< better-whitespace <<<<<<
 
 " 函数参数提示
 " >>>>>> echodoc >>>>>>
@@ -164,6 +183,7 @@ highlight link EchoDocFloat Pmenu
 " >>>>>> ZoomWin >>>>>>
 Plug 'vim-scripts/ZoomWin'
 map <F3> :ZoomWin<CR>
+nmap wwz :ZoomWin<CR>
 " <<<<<< ZoomWin <<<<<<
 
 " >>>>>> >>>>>>
