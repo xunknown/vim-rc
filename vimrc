@@ -1,14 +1,33 @@
 " ====== 基本配置 ======
-" 行号开关快捷键Ctrl+n
+" 行号开关快捷键
 map <C-n> :set number!<CR>
 " 开启行号显示
 set number
+" 水平分割窗口快捷键
+nmap whs :sp<cr>
+" 垂直分割窗口快捷键
+nmap wvs :vsp<cr>
+" 切换窗口快捷键
+nnoremap wn <C-W><C-W>
+" 关闭当前窗口快捷键wcc
+nmap wcc :close<cr>
+" 关闭其他当前窗口快捷键
+nmap wco :only<cr>
+" 调整窗口大小
+nmap wh+ :10wincmd><cr>
+nmap wh- :10wincmd<<cr>
+nmap wv+ :10wincmd+<cr>
+nmap wv- :10wincmd-<cr>
+" 告诉vim terminal支持 256 colors
+set t_Co=256
 " 高亮显示当前行/列
 set cursorline
-" hi CursorLine cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+hi CursorLine cterm=NONE ctermbg=brown ctermfg=white guibg=darkred guifg=white
 " set cursorcolumn
-" hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+" hi CursorColumn cterm=NONE ctermbg=gray ctermfg=NONE guibg=darkred guifg=white
 
+" 开启实时搜索功能
+set incsearch
 " 高亮显示搜索结果
 set hlsearch
 " 不自动换行
@@ -56,6 +75,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#formatter = 'unique_tail' " 'default'
+let g:airline_theme='luna'
 " <<<<<< airline <<<<<<
 
 " ------ 语法检查 ------
@@ -107,7 +127,47 @@ let g:CtrlSpaceDefaultMappingKey = "<C-m> "
 " let g:templates_directory = '~/.vim/templates'
 " <<<<<< template <<<<<<
 
+" 快速补全
+" >>>>>> YouCompleteMe >>>>>>
+Plug 'Valloric/YouCompleteMe'
+" <<<<<< YouCompleteMe <<<<<<
+
+" 代码快速对齐
+Plug 'junegunn/vim-easy-align'
+
+" 强化具体语言文件
+Plug 'vim-scripts/c.vim'
+Plug 'vim-scripts/a.vim'
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'fatih/vim-go'
+Plug 'elzr/vim-json'
+
+" 前后空格显示告警色
+Plug 'bronson/vim-trailing-whitespace'
+
+" vim列对齐线
+Plug 'Yggdroot/indentLine'
+
+" 前后空格显示告警色
+Plug 'bronson/vim-trailing-whitespace'
+
+" 函数参数提示
+" >>>>>> echodoc >>>>>>
+Plug 'Shougo/echodoc.vim'
+set noshowmode
+let g:echodoc_enable_at_startup = 1
+let g:echodoc#type = 'floating'
+highlight link EchoDocFloat Pmenu
+" <<<<<< echodoc <<<<<<
+
+" 窗口最大化
+" >>>>>> ZoomWin >>>>>>
+Plug 'vim-scripts/ZoomWin'
+map <F3> :ZoomWin<CR>
+" <<<<<< ZoomWin <<<<<<
+
+" >>>>>> >>>>>>
+" <<<<<< <<<<<<
 " Initialize plugin system
 call plug#end()
 " ====== 插件管理 ======
-
