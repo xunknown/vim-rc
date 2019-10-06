@@ -241,6 +241,12 @@ map <F3> :ZoomWin<CR>
 nmap <Leader>wz :ZoomWin<CR>
 " <<<<<< ZoomWin <<<<<<
 
+" 撤销记录列表
+" >>>>>> undotree >>>>>>
+Plug 'mbbill/undotree'
+nnoremap <F5> :UndotreeToggle<cr>
+" <<<<<< undotree <<<<<<
+
 " >>>>>> >>>>>>
 " <<<<<< <<<<<<
 " Initialize plugin system
