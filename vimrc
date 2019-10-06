@@ -1,28 +1,30 @@
 " ====== 基本配置 ======
+" 设置<Leader>键，默认为\
+let mapleader = "\\"
 " 行号开关快捷键
 map <C-n> :set number!<CR>
 " 开启行号显示
 set number
 " 水平分割窗口快捷键
-nmap whs :sp<cr>
+nmap <Leader>ws :sp<cr>
 " 垂直分割窗口快捷键
-nmap wvs :vsp<cr>
+nmap <Leader>wv :vsp<cr>
 " 切换窗口快捷键
-nnoremap wn <C-W><C-W>
-nnoremap wnh <C-W>h
-nnoremap wnj <C-W>j
-nnoremap wnk <C-W>k
-nnoremap wnl <C-W>l
-" 关闭当前窗口快捷键wcc
-nmap wcc :close<cr>
+nnoremap <Leader>ww <C-w><C-w>
+nnoremap <Leader>wh <C-w>h
+nnoremap <Leader>wj <C-w>j
+nnoremap <Leader>wk <C-w>k
+nnoremap <Leader>wl <C-w>l
+" 关闭当前窗口快捷键
+nmap <Leader>wc :close<cr>
 " 关闭其他当前窗口快捷键
-nmap wco :only<cr>
+nmap <Leader>wo :only<cr>
 " 调整窗口大小
-nmap wh+ :10wincmd><cr>
-nmap wh- :10wincmd<<cr>
-nmap wv+ :10wincmd+<cr>
-nmap wv- :10wincmd-<cr>
-nnoremap ww= <C-W>=
+nmap <Leader>w> :10wincmd><cr>
+nmap <Leader>w< :10wincmd<<cr>
+nmap <Leader>w+ :10wincmd+<cr>
+nmap <Leader>w- :10wincmd-<cr>
+nnoremap <Leader>w= <C-w>=
 " 高亮显示当前行/列
 set cursorline
 hi CursorLine cterm=NONE ctermbg=brown ctermfg=white guibg=darkred guifg=white
@@ -106,13 +108,13 @@ let g:ale_statusline_format = ['✗ %d', '⚡ %d', '✔ OK']
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%severity%][%linter%] %s'
-" 普通模式下，sp前往上一个错误或警告，sn前往下一个错误或警告
-nmap sp <Plug>(ale_previous_wrap)
-nmap sn <Plug>(ale_next_wrap)
-" <Leader>s触发/关闭语法检查
-nmap <Leader>s :ALEToggle<CR>
-" <Leader>d查看错误或警告的详细信息
-nmap <Leader>d :ALEDetail<CR>
+" 普通模式下，错误或警告浏览快捷键
+nmap <Leader>sp <Plug>(ale_previous_wrap)
+nmap <Leader>sn <Plug>(ale_next_wrap)
+" 触发/关闭语法检查快捷键
+nmap <Leader>ss :ALEToggle<CR>
+" 查看错误或警告的详细信息快捷键
+nmap <Leader>sd :ALEDetail<CR>
 " <<<<<< ale <<<<<<
 
 " ------ 括号/引号成对插入/删除 ------
@@ -162,16 +164,23 @@ Plug 'elzr/vim-json'
 " 成员函数、成员变量列表
 " >>>>>> tagbar >>>>>>
 Plug 'majutsushi/tagbar'
+" tagbar开关快捷键
 nmap <F8> :TagbarToggle<CR>
 " <<<<<< tagbar <<<<<<
 
 " 高亮关键字
+" >>>>>> Mark--Karkat >>>>>>
 Plug 'vim-scripts/Mark--Karkat'
+" 部分内置快捷键
+" <Leader>m 高亮/取消选中的单词
+" <Leader>n 取消高亮的所有单词
+" <Leader>/ 查找高亮的所有单词
+" <<<<<< Mark--Karkat <<<<<<
 
 " vim列对齐线
 " >>>>>> indentLine >>>>>>
 Plug 'Yggdroot/indentLine'
-" 设置对齐线开/关快捷键
+" 对齐线开/关快捷键
 nmap <leader>il :IndentLinesToggle<CR>
 " 设置对齐线默认开1/关0状态
 let g:indentLine_enabled = 1
@@ -205,11 +214,12 @@ let g:echodoc#type = 'floating'
 highlight link EchoDocFloat Pmenu
 " <<<<<< echodoc <<<<<<
 
-" 窗口最大化
+" 窗口最大化/还原
 " >>>>>> ZoomWin >>>>>>
 Plug 'vim-scripts/ZoomWin'
+" 窗口最大化/还原快捷键
 map <F3> :ZoomWin<CR>
-nmap wwz :ZoomWin<CR>
+nmap <Leader>wz :ZoomWin<CR>
 " <<<<<< ZoomWin <<<<<<
 
 " >>>>>> >>>>>>
