@@ -25,6 +25,12 @@ nmap <Leader>w< :10wincmd<<cr>
 nmap <Leader>w+ :10wincmd+<cr>
 nmap <Leader>w- :10wincmd-<cr>
 nnoremap <Leader>w= <C-w>=
+" buffer快捷键
+nmap <Leader>bn :bn<cr>
+nmap <Leader>bp :bp<cr>
+nmap <Leader>bf :bf<cr>
+nmap <Leader>bl :bl<cr>
+nmap <Leader>bd :bd<cr>
 " 高亮显示当前行/列
 set cursorline
 hi CursorLine cterm=NONE ctermbg=brown ctermfg=white guibg=darkred guifg=white
@@ -130,6 +136,19 @@ Plug 'bling/vim-bufferline'
 " ------ 文件/buffer模糊查找 ------
 " >>>>>> ctrlp >>>>>>
 Plug 'ctrlpvim/ctrlp.vim'
+" 部分命令和内置快捷键
+" 按Ctrl+p打开CtrlP
+" Run :CtrlP or :CtrlP [starting-directory] to invoke CtrlP in find file mode.
+" Run :CtrlPBuffer or :CtrlPMRU to invoke CtrlP in find buffer or find MRU file mode.
+" Run :CtrlPMixed to search in Files, Buffers and MRU files at the same time.
+" Press <c-f> and <c-b> to cycle between modes.
+" Press <c-d> to switch to filename only search instead of full path.
+" Press <c-r> to switch to regexp mode.
+" Use <c-j>, <c-k> or the arrow keys to navigate the result list.
+" Use <c-t> or <c-v>, <c-x> to open the selected entry in a new tab or in a new split.
+" Use <c-n>, <c-p> to select the next/previous string in the prompt's history.
+" Use <c-y> to create a new file and its parent directories.
+" Use <c-z> to mark/unmark multiple files and <c-o> to open them.
 " <<<<<< ctrlp <<<<<<
 
 " ------ 文件/buffer模糊查找 ------
