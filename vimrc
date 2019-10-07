@@ -63,6 +63,7 @@ Plug 'tpope/vim-sensible'
 " >>>>>> nerdtree >>>>>>
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 " Plug 'jistr/vim-nerdtree-tabs'
 " 内置在NERDTree操作区的一些基本操作
 " ?: 快速帮助文档
@@ -211,6 +212,12 @@ Plug 'ctrlpvim/ctrlp.vim'
 " <<<<<< ctrlp <<<<<<
 
 " ------ 文件/buffer模糊查找 ------
+" >>>>>> LeaderF >>>>>>
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
+" 运行:Leaderf -h命令查看帮助
+" <<<<<< LeaderF <<<<<<
+
+" ------ 文件/buffer模糊查找 ------
 " >>>>>> ctrlspace >>>>>>
 " Plug 'vim-ctrlspace/vim-ctrlspace'
 " set nocompatible
@@ -226,7 +233,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 
 " 快速补全
 " >>>>>> YouCompleteMe >>>>>>
-Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 " <<<<<< YouCompleteMe <<<<<<
 
 " 代码快速对齐
