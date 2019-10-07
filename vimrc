@@ -1,6 +1,8 @@
 " ====== 基本配置 ======
 " 设置<Leader>键，默认为\
 let mapleader = "\\"
+" 编码格式
+set encoding=UTF-8
 " 行号开关快捷键
 map <C-n> :set number!<CR>
 " 开启行号显示
@@ -58,6 +60,12 @@ call plug#begin('~/.vim/plugged')
 " >>>>>> vim-sensible >>>>>>
 Plug 'tpope/vim-sensible'
 " <<<<<< vim-sensible <<<<<<
+
+" 字体和图标
+" >>>>>> vim-devicon >>>>>>
+" Plug 'ryanoasis/vim-devicons'
+" set encoding=UTF-8
+" <<<<<< vim-devicons <<<<<<
 
 " ------ 目录树 ------
 " >>>>>> nerdtree >>>>>>
@@ -195,7 +203,7 @@ Plug 'bling/vim-bufferline'
 
 " ------ 文件/buffer模糊查找 ------
 " >>>>>> ctrlp >>>>>>
-Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'ctrlpvim/ctrlp.vim'
 " 部分命令和内置快捷键
 " 按Ctrl+p打开CtrlP
 " Run :CtrlP or :CtrlP [starting-directory] to invoke CtrlP in find file mode.
@@ -215,6 +223,32 @@ Plug 'ctrlpvim/ctrlp.vim'
 " >>>>>> LeaderF >>>>>>
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 " 运行:Leaderf -h命令查看帮助
+" Ctrl + p 打开文件搜索
+let g:Lf_ShortcutF = '<C-p>'
+noremap <Leader>ff :LeaderfFunction<cr>
+noremap <Leader>fb :LeaderfBuffer<cr>
+noremap <Leader>ft :LeaderfTag<cr>
+noremap <Leader>fm :LeaderfMru<cr>
+noremap <Leader>fl :LeaderfLine<cr>
+
+let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
+let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
+let g:Lf_WorkingDirectoryMode = 'Ac'
+let g:Lf_WindowHeight = 0.30
+let g:Lf_CacheDirectory = expand('~/.vim/cache')
+let g:Lf_ShowRelativePath = 0
+let g:Lf_HideHelp = 1
+let g:Lf_StlColorscheme = 'powerline'
+let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
+
+let g:Lf_NormalMap = {
+\ "File":   [["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
+\ "Buffer": [["<ESC>", ':exec g:Lf_py "bufExplManager.quit()"<CR>']],
+\ "Mru":    [["<ESC>", ':exec g:Lf_py "mruExplManager.quit()"<CR>']],
+\ "Tag":    [["<ESC>", ':exec g:Lf_py "tagExplManager.quit()"<CR>']],
+\ "Function":    [["<ESC>", ':exec g:Lf_py "functionExplManager.quit()"<CR>']],
+\ "Colorscheme":    [["<ESC>", ':exec g:Lf_py "colorschemeExplManager.quit()"<CR>']],
+\ }
 " <<<<<< LeaderF <<<<<<
 
 " ------ 文件/buffer模糊查找 ------
@@ -224,6 +258,16 @@ Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 " set hidden
 " let g:CtrlSpaceDefaultMappingKey = "<C-m> "
 " <<<<<< ctrlspace <<<<<<
+
+" 搜索工具
+" vim自带命令vimgrep
+" >>>>>> ack >>>>>>
+Plug 'mileszs/ack.vim'
+" 用法:Ack [options] {pattern} [{directories}]
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+" <<<<<< ack <<<<<<
 
 " ------ 文件模板 ------
 " >>>>>> template >>>>>>
@@ -265,13 +309,6 @@ let g:cpp_experimental_template_highlight = 1
 let c_no_curly_error=1
 " <<<<<< vim-cpp-enhanced-highlight <<<<<<
 
-" 成员函数、成员变量列表
-" >>>>>> tagbar >>>>>>
-Plug 'majutsushi/tagbar'
-" tagbar开关快捷键
-nmap <F8> :TagbarToggle<CR>
-" <<<<<< tagbar <<<<<<
-
 " 高亮关键字
 " >>>>>> Mark--Karkat >>>>>>
 Plug 'vim-scripts/Mark--Karkat'
@@ -280,6 +317,17 @@ Plug 'vim-scripts/Mark--Karkat'
 " <Leader>n 取消高亮的所有单词
 " <Leader>/ 查找高亮的所有单词
 " <<<<<< Mark--Karkat <<<<<<
+
+" 自动后台更新ctags
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'skywind3000/gutentags_plus'
+
+" 成员函数、成员变量列表
+" >>>>>> tagbar >>>>>>
+Plug 'majutsushi/tagbar'
+" tagbar开关快捷键
+nmap <F8> :TagbarToggle<CR>
+" <<<<<< tagbar <<<<<<
 
 " vim列对齐线
 " >>>>>> indentLine >>>>>>
