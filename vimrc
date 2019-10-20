@@ -44,10 +44,28 @@ highlight CursorLine cterm=NONE ctermbg=brown ctermfg=white guibg=brown guifg=wh
 " set cursorcolumn
 " highlight CursorColumn cterm=NONE ctermbg=gray ctermfg=NONE guibg=darkred guifg=white
 " tab和空格显示
-map <F7> :set list!<CR>
-set list
-set listchars=tab:┊-,space:`,trail:┊
-set listchars=tab:┊-,trail:┊
+" map <F7> :set list!<CR>
+" set list
+" set listchars=tab:┊-,space:`,trail:┊
+" set listchars=tab:┊-,trail:┊
+let g:list_toggle = 1
+function! ListToggle()
+	if g:list_toggle == 0
+		set nolist
+		let g:list_toggle = 1
+	elseif g:list_toggle == 1
+		set list
+		set listchars=tab:┊-,trail:┊
+		let g:list_toggle = 2
+	elseif g:list_toggle == 2
+		set list
+		set listchars=tab:┊-,space:`,trail:┊
+		let g:list_toggle = 0
+	endif
+endfunction
+command! -nargs=0 ListToggle call ListToggle()
+call ListToggle()
+map <F7> :ListToggle<CR>
 " 开启实时搜索功能
 set incsearch
 " 高亮显示搜索结果
