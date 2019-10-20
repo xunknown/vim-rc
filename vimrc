@@ -3,6 +3,11 @@
 let mapleader = "\\"
 " 编码格式
 set encoding=UTF-8
+" 语法高亮
+syntax on
+" 终端颜色
+set t_Co=256
+set background=dark
 " 行号开关快捷键
 map <C-n> :set number!<CR>
 " 开启行号显示
@@ -35,13 +40,20 @@ nmap <Leader>bl :bl<cr>
 nmap <Leader>bd :bd<cr>
 " 高亮显示当前行/列
 set cursorline
-hi CursorLine cterm=NONE ctermbg=brown ctermfg=white guibg=brown guifg=white
+highlight CursorLine cterm=NONE ctermbg=brown ctermfg=white guibg=brown guifg=white
 " set cursorcolumn
-" hi CursorColumn cterm=NONE ctermbg=gray ctermfg=NONE guibg=darkred guifg=white
-
+" highlight CursorColumn cterm=NONE ctermbg=gray ctermfg=NONE guibg=darkred guifg=white
+" tab和空格显示
+map <F7> :set list!<CR>
+set list
+set listchars=tab:┊-,space:`,trail:┊
+set listchars=tab:┊-,trail:┊
 " 开启实时搜索功能
 set incsearch
 " 高亮显示搜索结果
+set hlsearch
+nmap <Leader>hs :set hlsearch!<cr>
+
 set hlsearch
 " 不自动换行
 " set nowrap
@@ -49,6 +61,7 @@ set hlsearch
 set linebreak
 "终端滚动时时刻保留n行在界面中
 " set scrolloff=25
+
 " ====== 基本配置 ======
 
 " ====== 插件管理 ======
@@ -60,6 +73,15 @@ call plug#begin('~/.vim/plugged')
 " >>>>>> vim-sensible >>>>>>
 Plug 'tpope/vim-sensible'
 " <<<<<< vim-sensible <<<<<<
+
+" ------ 配色方案 ------
+" 插件提供的colorscheme需要在最后设置
+" >>>>>> vim-colorschemes >>>>>>
+Plug 'flazz/vim-colorschemes'
+" <<<<<< vim-colorschemes <<<<<<
+" >>>>>> dracula >>>>>>
+Plug 'dracula/vim', { 'as': 'dracula' }
+" <<<<<< dracula <<<<<<
 
 " 字体和图标
 " >>>>>> vim-devicon >>>>>>
@@ -155,21 +177,35 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#formatter = 'unique_tail' " 'default'
-let g:airline_theme='luna'
+" let g:airline_theme='luna'
+let g:airline_theme='light'
 " <<<<<< airline <<<<<<
 
 " ------ 语法检查 ------
 " >>>>>> ale >>>>>>
 Plug 'dense-analysis/ale'
+" 设置检查工具
+let g:ale_enabled = 0
+let g:ale_linters_explicit = 1
+let g:ale_linters = {
+\   'c': ['clang'],
+\   'c++': ['clang'],
+\   'bash': ['shellcheck'],
+\   'go': ['gofmt', 'golint'],
+\   'python': ['pylint'],
+\   'text': [],
+\}
+" 检查时机配置
+let g:ale_echo_delay = 20
+let g:ale_lint_delay = 500
+let g:ale_completion_delay = 500
+let g:ale_lint_on_text_changed = 'normal'
+let g:ale_lint_on_insert_leave = 1
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_save = 1
 " 始终开启标志列
 let g:ale_sign_column_always = 1
-let g:ale_set_highlights = 0
-" 设置检查工具
-let g:ale_linters = {
-\   'c++': ['clang'],
-\   'c': ['clang'],
-\   'python': ['pylint'],
-\}
+let g:ale_set_highlights = 1
 " 自定义error和warning图标
 let g:ale_sign_error = '✗'
 let g:ale_sign_warning = '⚡'
@@ -193,8 +229,21 @@ nmap <Leader>sd :ALEDetail<CR>
 " ------ 括号/引号成对插入/删除 ------
 " >>>>>> auto-pairs >>>>>>
 Plug 'jiangmiao/auto-pairs'
-let g:AutoPairs={'<':'>', '(':')', '[':']', '{':'}',"'":"'",'"':'"', "`":"`", '```':'```', '"""':'"""', "'''":"'''"}
+" let g:AutoPairs={'<':'>', '(':')', '[':']', '{':'}',"'":"'",'"':'"', "`":"`", '```':'```', '"""':'"""', "'''":"'''"}
 " <<<<<< auto-pairs <<<<<<
+
+" ------ 格式化 ------
+" >>>>>> vim-autoformat >>>>>>
+Plug 'Chiel92/vim-autoformat'
+let g:formatdef_my_custom_c = '"astyle --mode=c --style=K&R"'
+let g:formatters_c = ['my_custom_c']
+"au BufWrite * :Autoformat
+let g:autoformat_autoindent = 1
+let g:autoformat_retab = 1
+let g:autoformat_remove_trailing_spaces = 1
+" 快捷键
+noremap <F6> :Autoformat<CR>
+" <<<<<< vim-autoformat <<<<<<
 
 " ------ 显示buffers ------
 " >>>>>> bufferline >>>>>>
@@ -443,3 +492,6 @@ nnoremap <F5> :UndotreeToggle<cr>
 " Initialize plugin system
 call plug#end()
 " ====== 插件管理 ======
+
+" 插件提供的colorscheme需要在最后设置
+" colorscheme dracula
